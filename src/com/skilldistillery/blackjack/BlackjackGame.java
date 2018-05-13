@@ -1,12 +1,8 @@
 package com.skilldistillery.blackjack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
-import com.skilldistillery.common.Card;
+import java.util.Scanner;
 import com.skilldistillery.common.Deck;
-import com.skilldistillery.common.Hand;
 
 public class BlackjackGame {
 	BlackjackHand playerHand;
@@ -30,10 +26,12 @@ public class BlackjackGame {
 		dealerHand = new BlackjackHand();
 		dealerHand.addCard(deck.dealCard());
 		dealerHand.addCard(deck.dealCard());
+		// Show the player their cards
 		System.out.println("Your cards are:");
 		playerHand.showCards();
 		int playerValue = playerHand.getHandValue();
 		System.out.println("The value of your hand is: " + playerValue);
+		// Show the dealer's up card
 		System.out.println("The dealer is showing:");
 		dealerHand.showOneCard();
 
@@ -47,28 +45,30 @@ public class BlackjackGame {
 		} else {
 			// Loop to run while player has not busted
 			String hitOrStay;
-				do {
-					System.out.println("Would you like to Hit or Stay? Enter H or S");
-					hitOrStay = kb.next();
-					if (hitOrStay.equals("S")) {
-						break;
+			do {
+				System.out.println("Would you like to Hit or Stay? Enter H or S");
+				hitOrStay = kb.next();
+				// If they choose to stay, move to the dealer's turn
+				if (hitOrStay.equals("S")) {
+					break;
+				}
+				// If they choose to Hit, add a card to their hand, check for bust, and re-run
+				// the loop
+				else if (hitOrStay.equals("H")) {
+					playerHand.addCard(deck.dealCard());
+					playerHand.showCards();
+					playerValue = playerHand.getHandValue();
+					System.out.println("The value of your hand is: " + playerValue);
+					if (playerValue > 21) {
+						System.out.println("You have busted. You lose.");
+						System.exit(0);
 					}
+				}
 
-					else if (hitOrStay.equals("H")) {
-						playerHand.addCard(deck.dealCard());
-						playerHand.showCards();
-						playerValue = playerHand.getHandValue(); 
-						System.out.println("The value of your hand is: " + playerValue);
-						if (playerValue > 21) {
-							System.out.println("You have busted. You lose.");
-							break;
-						}
-					}
+			} while (hitOrStay.equals("H"));
+		}
 
-				} while (hitOrStay.equals("H"));
-			}
-
-		
+		// Logic for dealer's hand
 		dealerHand.showSecondCard();
 		while (dealerValue < 17) {
 			dealerHand.addCard(deck.dealCard());
@@ -78,17 +78,18 @@ public class BlackjackGame {
 			System.out.println("The dealer's value is now: " + dealerValue);
 			if (dealerValue > 21) {
 				System.out.println("Dealer has busted. You win!");
-				break;
+				System.exit(0);
 			}
 		}
-
+		// Outputs based on had result
 		if (dealerValue > playerValue) {
-			System.out.println("You win.");
+			System.out.println("You lose.");
 		} else if (dealerValue == playerValue) {
 			System.out.println("It's a push.");
 		} else {
-			System.out.println("You lose.");
+			System.out.println("You win.");
 		}
+		kb.close();
 	}
 
 }
