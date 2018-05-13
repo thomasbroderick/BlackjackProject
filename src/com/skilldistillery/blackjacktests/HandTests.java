@@ -13,9 +13,11 @@ import com.skilldistillery.blackjack.BlackjackHand;
 import com.skilldistillery.common.Card;
 import com.skilldistillery.common.Deck;
 import com.skilldistillery.common.Hand;
+import com.skilldistillery.common.Rank;
+import com.skilldistillery.common.Suit;
 
 public class HandTests {
-	Hand h;
+	BlackjackHand h;
 	Deck d;
 	List<Card> dealtCards = new ArrayList<>();
 	
@@ -34,12 +36,21 @@ public class HandTests {
 	}
 
 	
-	@Test
+	/*@Test
 	public void test_add_card_functionality() {
 		
 		h.addCard(d.dealCard());
 		((BlackjackHand) h).showCards();
 		System.out.println(h.getHandValue());
+	}*/
+	@Test
+	public void test_soft_ace_boolean() {
+		Card c = new Card(Suit.CLUBS, Rank.ACE);
+		Card d = new Card(Suit.CLUBS, Rank.TEN);
+		
+		h.addCard(c);
+		h.addCard(d);
+		assertTrue(h.softAce());
 	}
 	
 

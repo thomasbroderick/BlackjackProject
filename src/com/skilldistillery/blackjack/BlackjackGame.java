@@ -2,7 +2,10 @@ package com.skilldistillery.blackjack;
 
 
 import java.util.Scanner;
+
+import com.skilldistillery.common.Card;
 import com.skilldistillery.common.Deck;
+import com.skilldistillery.common.Rank;
 
 public class BlackjackGame {
 	BlackjackHand playerHand;
@@ -92,4 +95,6 @@ public class BlackjackGame {
 		kb.close();
 	}
 
+
+	
 }
