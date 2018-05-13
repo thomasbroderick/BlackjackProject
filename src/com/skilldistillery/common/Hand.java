@@ -9,13 +9,15 @@ public abstract class Hand {
 	public Hand() {
 	}
 	
-	public int getHandValue() {
+	/*public int getHandValue() {
 		int value = 0;
 		for (Card card : cards) {
 			value += card.getValue();
 		}
 		return value;
-	}
+	}*/
+	
+	public abstract int getHandValue();
 	
 	public void addCard(Card c) {
 		cards.add(c);
