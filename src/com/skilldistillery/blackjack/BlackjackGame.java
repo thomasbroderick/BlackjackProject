@@ -69,8 +69,7 @@ public class BlackjackGame {
 							playerValue -= 10;
 							System.out.println("The value of your hand is: " + playerValue);
 						}
-					}
-					else {
+					} else {
 						System.out.println("The value of your hand is: " + playerValue);
 					}
 				}
@@ -87,22 +86,26 @@ public class BlackjackGame {
 			System.out.println("Dealer draws a card and now has: ");
 			dealerHand.showCards();
 			dealerValue = dealerHand.getHandValue();
-			System.out.println("The dealer's value is now: " + dealerValue);
 			if (dealerValue > 21) {
-				System.out.println("Dealer has busted. You win!");
-				System.exit(0);
+				if (!dealerHand.softAce()) {
+					System.out.println("The dealer's value is now: " + dealerValue);
+					System.out.println("Dealer has busted. You win!");
+					System.exit(0);
+				} else {
+					dealerValue -= 10;
+					System.out.println("The dealer's value is now: " + dealerValue);
+				}
 			}
+			System.out.println("The dealer's final value is: " + dealerValue);
+			// Outputs based on had result
+			if (dealerValue > playerValue) {
+				System.out.println("You lose.");
+			} else if (dealerValue == playerValue) {
+				System.out.println("It's a push.");
+			} else {
+				System.out.println("You win.");
+			}
+			kb.close();
 		}
-		System.out.println("The dealer's final value is: " + dealerValue);
-		// Outputs based on had result
-		if (dealerValue > playerValue) {
-			System.out.println("You lose.");
-		} else if (dealerValue == playerValue) {
-			System.out.println("It's a push.");
-		} else {
-			System.out.println("You win.");
-		}
-		kb.close();
 	}
-
 }
