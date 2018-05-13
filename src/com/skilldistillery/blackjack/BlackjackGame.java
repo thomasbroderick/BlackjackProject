@@ -1,6 +1,5 @@
 package com.skilldistillery.blackjack;
 
-
 import java.util.Scanner;
 
 import com.skilldistillery.common.Card;
@@ -61,10 +60,18 @@ public class BlackjackGame {
 					playerHand.addCard(deck.dealCard());
 					playerHand.showCards();
 					playerValue = playerHand.getHandValue();
-					System.out.println("The value of your hand is: " + playerValue);
 					if (playerValue > 21) {
-						System.out.println("You have busted. You lose.");
-						System.exit(0);
+						if (!playerHand.softAce()) {
+							System.out.println("The value of your hand is: " + playerValue);
+							System.out.println("You have busted. You lose.");
+							System.exit(0);
+						} else {
+							playerValue -= 10;
+							System.out.println("The value of your hand is: " + playerValue);
+						}
+					}
+					else {
+						System.out.println("The value of your hand is: " + playerValue);
 					}
 				}
 
@@ -72,7 +79,9 @@ public class BlackjackGame {
 		}
 
 		// Logic for dealer's hand
+		System.out.print("The dealer's down card is: ");
 		dealerHand.showSecondCard();
+		System.out.println("The dealer's value is now: " + dealerValue);
 		while (dealerValue < 17) {
 			dealerHand.addCard(deck.dealCard());
 			System.out.println("Dealer draws a card and now has: ");
@@ -84,6 +93,7 @@ public class BlackjackGame {
 				System.exit(0);
 			}
 		}
+		System.out.println("The dealer's final value is: " + dealerValue);
 		// Outputs based on had result
 		if (dealerValue > playerValue) {
 			System.out.println("You lose.");
@@ -95,6 +105,4 @@ public class BlackjackGame {
 		kb.close();
 	}
 
-
-	
 }

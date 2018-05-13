@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.*;
 
+import com.skilldistillery.blackjack.BlackjackGame;
 import com.skilldistillery.blackjack.BlackjackHand;
 import com.skilldistillery.common.Card;
 import com.skilldistillery.common.Deck;
@@ -51,6 +52,19 @@ public class HandTests {
 		h.addCard(c);
 		h.addCard(d);
 		assertTrue(h.softAce());
+	}
+	@Test
+	public void test_soft_ace_hand_value() {
+		BlackjackGame bjg = new BlackjackGame();
+		Card c = new Card(Suit.CLUBS, Rank.ACE);
+		Card d = new Card(Suit.CLUBS, Rank.ACE);
+		Card e = new Card(Suit.CLUBS, Rank.SEVEN);
+		
+		h.addCard(c);
+		h.addCard(d);
+		h.addCard(e);
+		bjg.play();
+		assertEquals(19, h.getHandValue());
 	}
 	
 
