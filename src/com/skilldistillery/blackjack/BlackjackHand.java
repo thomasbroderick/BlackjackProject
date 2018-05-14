@@ -5,7 +5,9 @@ import com.skilldistillery.common.Hand;
 import com.skilldistillery.common.Rank;
 
 public class BlackjackHand extends Hand {
-
+	private boolean busted = false;
+	private boolean blackjack = false;
+	
 	public BlackjackHand() {
 		
 	}
@@ -28,6 +30,22 @@ public class BlackjackHand extends Hand {
 		}
 		return b;
 		
+	}
+
+	public boolean isBusted() {
+		return busted;
+	}
+
+	public void setBusted(boolean busted) {
+		this.busted = busted;
+	}
+
+	public boolean isBlackjack() {
+		return blackjack;
+	}
+
+	public void setBlackjack(boolean blackjack) {
+		this.blackjack = blackjack;
 	}
 
 	
