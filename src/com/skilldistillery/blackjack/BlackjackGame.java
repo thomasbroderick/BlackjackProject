@@ -170,9 +170,11 @@ public class BlackjackGame {
 					}
 				}
 			}
-			System.out.println("The dealer's final value is: " + dealerValue);
+			
+			
 
 		}
+		System.out.println("The dealer's final value is: " + dealerValue);
 		return b;
 	}
 
